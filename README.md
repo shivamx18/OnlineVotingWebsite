@@ -57,42 +57,42 @@ An SQL database is used to store and manage data securely and efficiently. The d
 Tables Overview
 
 
-1.	Admin Table
-The admin table stores the details of the administrators who are responsible for managing the voting system, including authentication.
+1.Admin Table
+-The admin table stores the details of the administrators who are responsible for managing the voting system, including authentication.
 
 
-Fields:
-admin_id (INT, Primary Key) – Unique identifier for each admin.
-username (VARCHAR) – Username of the admin.
-password (VARCHAR) – Hashed password of the admin.
-first_name (VARCHAR) – First name of the candidate.
-last_name (VARCHAR) - Last name of the candidate.
-Email (VARCHAR) – Email address of the admin.
-Created_at (TIMESTAMP) – Timestamp of when the vote was cast.
+-Fields:
+ -admin_id (INT, Primary Key) – Unique identifier for each admin.
+ -username (VARCHAR) – Username of the admin.
+ -password (VARCHAR) – Hashed password of the admin.
+ -first_name (VARCHAR) – First name of the candidate.
+ -last_name (VARCHAR) - Last name of the candidate.
+ -Email (VARCHAR) – Email address of the admin.
+ -Created_at (TIMESTAMP) – Timestamp of when the vote was cast.
 
-2.	Candidate Table
-The candidate table stores information about the candidates who are standing for election.
+2.Candidate Table
+-The candidate table stores information about the candidates who are standing for election.
 
-Fields:
-candidate_id (INT, Primary Key) – Unique identifier for each candidate.
-first_name (VARCHAR) – First name of the candidate.
-last_name (VARCHAR) - Last name of the candidate.
-Email (VARCHAR) – Email address of the admin.
-Created_at (TIMESTAMP) – Timestamp of when the vote was cast.
+-Fields:
+ -candidate_id (INT, Primary Key) – Unique identifier for each candidate.
+ -first_name (VARCHAR) – First name of the candidate.
+ -last_name (VARCHAR) - Last name of the candidate.
+ -Email (VARCHAR) – Email address of the admin.
+ -Created_at (TIMESTAMP) – Timestamp of when the vote was cast.
 
 
 3.Voter Table
-The voter table stores the details of the voters who are eligible to vote in the election.
+-The voter table stores the details of the voters who are eligible to vote in the election.
 
 
-Fields:
-voter_id (INT, Primary Key) – Unique identifier for each voter.
-username (VARCHAR) – Username of the admin.
-password (VARCHAR) – Hashed password of the admin.
-first_name (VARCHAR) – First name of the candidate.
-last_name (VARCHAR) - Last name of the candidate.
-Email (VARCHAR) – Email address of the admin.
-Created_at (TIMESTAMP) – Timestamp of when the vote was cast.
+-Fields:
+ -voter_id (INT, Primary Key) – Unique identifier for each voter.
+ -username (VARCHAR) – Username of the admin.
+ -password (VARCHAR) – Hashed password of the admin.
+ -first_name (VARCHAR) – First name of the candidate.
+ -last_name (VARCHAR) - Last name of the candidate.
+ -Email (VARCHAR) – Email address of the admin.
+ -Created_at (TIMESTAMP) – Timestamp of when the vote was cast.
 
 
 4.Vote Table
