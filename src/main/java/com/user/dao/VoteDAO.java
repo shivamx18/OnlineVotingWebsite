@@ -207,5 +207,21 @@ public class VoteDAO {
 		return status;
 	}
 	
+	public int countTotalVotes() {
+        int count = 0;
+        VoteDAO dao=new VoteDAO();
+        try (Connection connection = dao.getConnection()) {
+            String query = "SELECT COUNT(*) AS total FROM vote";
+            PreparedStatement stmt = connection.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt("total");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+	
   
 }

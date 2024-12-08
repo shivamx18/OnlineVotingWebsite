@@ -14,6 +14,11 @@ public class Admin {
 	public Admin() {
 		
 	}
+	 public Admin(String username) {
+	        
+	        this.username = username;
+	       
+	    }
 	 public Admin(String username, String password,String firstname,String lastname, String email) {
 	        
 	        this.username = username;

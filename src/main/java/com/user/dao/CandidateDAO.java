@@ -16,11 +16,12 @@ public class CandidateDAO {
 	private String jdbcUserName="root";
 	private String jdbcPassword="12345678";
 	
-	private static final String INSERT_CANDIDATE_SQL="INSERT INTO candidate"+"(username,password,first_name,last_name,email) VALUES "+"(?,?,?,?,?);";
+	private static final String INSERT_CANDIDATE_SQL="INSERT INTO candidate"+"(first_name,last_name,email) VALUES "+"(?,?,?);";
 	private static final String SELECT_CANDIDATE_BY_ID="SELECT * FROM candidate where candidate_id=?;";
 	private static final String SELECT_ALL_CANDIDATE="select * from candidate;";
 	private static final String DELETE_CANDIDATE_SQL="delete from candidate where candidate_id=?;";
-	private static final String UPDATE_CANDIDATE_SQL="update candidate set username=?,password=?,first_name=?,last_name=? email=? where candidate_id=?;";
+	private static final String UPDATE_CANDIDATE_SQL="update candidate set first_name=?,last_name=? ,email=? where candidate_id=?;";
+	private static final String SELECT_CANDIDATE_BY_EMAIL="SELECT * FROM candidate where email=?;";
 	
 	
 	public CandidateDAO() {
@@ -62,11 +63,9 @@ public class CandidateDAO {
 		try(Connection connection=dao.getConnection())
 		{
 			PreparedStatement preparedStatement=connection.prepareStatement(INSERT_CANDIDATE_SQL);
-			preparedStatement.setString(1, candidate.getUsername());
-			preparedStatement.setString(2, candidate.getPassword());
-			preparedStatement.setString(3, candidate.getFirstname());
-			preparedStatement.setString(4, candidate.getLastname());
-			preparedStatement.setString(5, candidate.getEmail());
+			preparedStatement.setString(1, candidate.getFirstname());
+			preparedStatement.setString(2, candidate.getLastname());
+			preparedStatement.setString(3, candidate.getEmail());
 			
 			preparedStatement.executeUpdate();
 		}
@@ -90,8 +89,6 @@ public class CandidateDAO {
 			while(resultSet.next())
 			{
 			candidate.setCandidateId(id);	
-			candidate.setUsername(resultSet.getString("username"));
-			candidate.setPassword(resultSet.getString("password"));
 			candidate.setFirstname(resultSet.getString("first_name"));
 			candidate.setLastname(resultSet.getString("last_name"));
 			candidate.setEmail(resultSet.getString("email"));
@@ -105,6 +102,35 @@ public class CandidateDAO {
 		return candidate;
 	}
 	
+	public Candidate selectCandidate(String email)
+	{
+		Candidate candidate=new Candidate();
+		CandidateDAO dao=new CandidateDAO();
+		try(Connection connection=dao.getConnection())
+		{
+			PreparedStatement preparedStatement=connection.prepareStatement(SELECT_CANDIDATE_BY_EMAIL);
+			preparedStatement.setString(1, email);
+			
+			ResultSet  resultSet=preparedStatement.executeQuery();
+			if (resultSet.next()) {
+	            
+	            return new Candidate(
+	                resultSet.getInt("candidate_id"),
+	                resultSet.getString("first_name"),
+	                resultSet.getString("last_name"),
+	                resultSet.getString("email")
+	            );
+			}
+			
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
 	
 	public List<Candidate> selectAllCandidate()
 	{
@@ -117,14 +143,12 @@ public class CandidateDAO {
 			
 			while(resultSet.next())
 			{
-				int candidate_id = resultSet.getInt("candidate_id");
-				String username=resultSet.getString("username");
-				String password=resultSet.getString("password");
+				int candidate_id = resultSet.getInt("candidate_id");		
 				String first_name=resultSet.getString("first_name");
 				String last_name=resultSet.getString("last_name");
 				String email=resultSet.getString("email");
 				
-				users.add(new Candidate(candidate_id,username,password,first_name,last_name, email));
+				users.add(new Candidate(candidate_id,first_name,last_name, email));
 	
 			}
 			
@@ -166,11 +190,10 @@ public class CandidateDAO {
 		try(Connection connection=dao.getConnection())
 		{
 			PreparedStatement preparedStatement=connection.prepareStatement(UPDATE_CANDIDATE_SQL);
-			preparedStatement.setString(1, candidate.getUsername());
-			preparedStatement.setString(2, candidate.getPassword());
-			preparedStatement.setString(3, candidate.getFirstname());
-			preparedStatement.setString(4, candidate.getLastname());
-			preparedStatement.setString(4, candidate.getEmail());
+			preparedStatement.setString(1, candidate.getFirstname());
+			preparedStatement.setString(2, candidate.getLastname());
+			preparedStatement.setString(3, candidate.getEmail());
+			preparedStatement.setInt(4, candidate.getCandidateId());
 			
 			
 			
@@ -184,6 +207,21 @@ public class CandidateDAO {
 		
 		return status;
 	}
+	public int countTotalCandidates() {
+        int count = 0;
+        CandidateDAO dao=new CandidateDAO();
+        try (Connection connection = dao.getConnection()) {
+            String query = "SELECT COUNT(*) AS total FROM candidate";
+            PreparedStatement stmt = connection.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt("total");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
 	
   
 }
