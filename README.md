@@ -42,10 +42,10 @@ The frontend is designed to be user-friendly and responsive, built with HTML, CS
 An SQL database is used to store and manage data securely and efficiently. The database structure includes tables for users, candidates, votes, and admin information.
 
 - *Database Tables*:
-  Admin: Stores details of the administrators who manage the voting process.
-  Candidate: Stores information about the candidates standing for election.
-  Voter: Stores information about the eligible voters.
-  Vote: Stores the votes cast by the voters for the candidates.
+  -Admin: Stores details of the administrators who manage the voting process.
+  -Candidate: Stores information about the candidates standing for election.
+ -Voter: Stores information about the eligible voters.
+ -Vote: Stores the votes cast by the voters for the candidates.
 
 - *Approach*:
   - Data integrity is ensured with foreign key constraints, especially in linking votes to users and candidates.
@@ -55,8 +55,12 @@ An SQL database is used to store and manage data securely and efficiently. The d
 
 
 Tables Overview
+
+
 1.	Admin Table
 The admin table stores the details of the administrators who are responsible for managing the voting system, including authentication.
+
+
 Fields:
 admin_id (INT, Primary Key) – Unique identifier for each admin.
 username (VARCHAR) – Username of the admin.
@@ -75,8 +79,12 @@ first_name (VARCHAR) – First name of the candidate.
 last_name (VARCHAR) - Last name of the candidate.
 Email (VARCHAR) – Email address of the admin.
 Created_at (TIMESTAMP) – Timestamp of when the vote was cast.
+
+
 3.Voter Table
 The voter table stores the details of the voters who are eligible to vote in the election.
+
+
 Fields:
 voter_id (INT, Primary Key) – Unique identifier for each voter.
 username (VARCHAR) – Username of the admin.
@@ -85,8 +93,12 @@ first_name (VARCHAR) – First name of the candidate.
 last_name (VARCHAR) - Last name of the candidate.
 Email (VARCHAR) – Email address of the admin.
 Created_at (TIMESTAMP) – Timestamp of when the vote was cast.
+
+
 4.Vote Table
 The vote table records the votes cast by voters for candidates.
+
+
 Fields:
 Vote_id (INT, Primary Key) – Unique identifier for each vote record.
 Voter_id (INT, Foreign Key) – Reference to the voter_id in the voter table.
