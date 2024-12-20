@@ -57,7 +57,7 @@ An SQL database is used to store and manage data securely and efficiently. The d
 Tables Overview
 
 
-1.Admin Table
+1. Admin Table
 -The admin table stores the details of the administrators who are responsible for managing the voting system, including authentication.
 
 
@@ -70,7 +70,7 @@ Tables Overview
  -Email (VARCHAR) – Email address of the admin.
  -Created_at (TIMESTAMP) – Timestamp of when the vote was cast.
 
-2.Candidate Table
+2. Candidate Table
 -The candidate table stores information about the candidates who are standing for election.
 
 -Fields:
@@ -81,7 +81,7 @@ Tables Overview
  -Created_at (TIMESTAMP) – Timestamp of when the vote was cast.
 
 
-3.Voter Table
+3. Voter Table
 -The voter table stores the details of the voters who are eligible to vote in the election.
 
 
@@ -95,7 +95,7 @@ Tables Overview
  -Created_at (TIMESTAMP) – Timestamp of when the vote was cast.
 
 
-4.Vote Table
+4. Vote Table
 The vote table records the votes cast by voters for candidates.
 
 
